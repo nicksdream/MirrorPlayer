@@ -778,7 +778,7 @@ public class MirrorActivity extends Activity {
 				.setTitle(R.string.dialogtitle_changelayout)
 				.setView(dlgview)
 				.setPositiveButton(R.string.dialoglabel_ok, new DialogInterface.OnClickListener() {
-		
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						int rows = Integer.parseInt(edtxt_rows.getText().toString());
@@ -796,9 +796,11 @@ public class MirrorActivity extends Activity {
 						SysParamManager.getInstance().setLayoutInfo(rows, columns);
 						mAutoZoomOutWidth = mScreenWidth/columns;
 				        mAutoZoomOutHeight = mScreenHeight/rows;
-				        zoomInOrOut(mAutoZoomOutWidth, mAutoZoomOutHeight);
+				        if (mCurrentStatus == STATUS_AUTOZOOMOUT) {
+				        	autoZoomOut();
+				        }
 					}
-		
+
 				})
 				.setNegativeButton(R.string.dialoglabel_cancel, null)
 				.show();
@@ -820,7 +822,7 @@ public class MirrorActivity extends Activity {
 				.setTitle(R.string.dialogtitle_modifysysparams)
 				.setView(dlgview)
 				.setPositiveButton(R.string.dialoglabel_ok, new DialogInterface.OnClickListener() {
-		
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						int autozoomtimeout = Integer.parseInt(
@@ -839,7 +841,7 @@ public class MirrorActivity extends Activity {
 						}
 						SysParamManager.getInstance().setUserParams(autozoomtimeout, pictureduration);
 					}
-		
+
 				})
 				.setNegativeButton(R.string.dialoglabel_cancel, null)
 				.show();
