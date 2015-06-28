@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MirrorPlayer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="txt_progbar">Loading data......</string>
+
+    <string name="appmenu_title">Function Menu</string>
+	<string name="appmenu_item_updatematerials">Update Materials</string>
+	<string name="appmenu_item_changelayout">Change Layout</string>
+	<string name="appmenu_item_modifysysparams">Modify System Parameters</string>
+
+	<string name="dialoglabel_ok">Ok</string>
+	<string name="dialoglabel_cancel">Cancel</string>
+
+	<string name="dialogtitle_updatematerials">Update Materials</string>
+	<string name="dialoglabel_udiskupdate">Udisk Update</string>
+
+	<string name="dialogtitle_updatematerials_failure">Update Materials Failure</string>
+	<string name="dialogmessage_updatematerials_pathexception">Please check if udisk has been inserted. And make sure there is materials folder in the root path of udisk.</string>
+	<string name="dialogmessage_updatematerials_numberexception">Please check if there is material in the material folder of udisk.</string>
+
+	<string name="progressbardlg_title">Update Materials</string>
+	<string name="progressbardlg_msg_initialize">Updating materials, please wait a moment...</string>
+	<string name="progressbardlg_msg_start">Copying the file :&#160;</string>
+	<string name="progressbardlg_numberformat">File %1$d of %2$d</string>
+
+	<string name="dialogtitle_changelayout">Change Layout</string>
+	<string name="dlgtxt_rows">Rows :&#160;</string>
+	<string name="dlgtxt_columns">Columns :&#160;</string>
+
+	<string name="dialogtitle_modifysysparams">Modify System Parameters</string>
+	<string name="dlgtxt_autozoomtimeout">Zoom timeout :&#160;</string>
+	<string name="dlgtxt_pictureduration">Picture duration :&#160;</string>
+
+</resources>

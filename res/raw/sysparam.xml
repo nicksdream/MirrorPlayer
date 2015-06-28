@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sysparam version="1">
+
+    <devinfo
+        id="YSMT001"
+        model="YSMT-200"
+        autozoomtimeout="5"
+        pictureduration="10" />
+
+    <modeinfo
+        type="1"
+        description="Auto zoom" />
+
+    <layoutinfo
+        rownum="3"
+        columnnum="3" />
+ 
+</sysparam>

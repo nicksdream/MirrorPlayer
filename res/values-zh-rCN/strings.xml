@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">广告播放器</string>
+    <string name="action_settings">设置</string>
+
+    <string name="txt_progbar">数据加载中......</string>
+
+    <string name="appmenu_title">功能菜单</string>
+    <string name="appmenu_item_updatematerials">更新素材</string>
+    <string name="appmenu_item_changelayout">更改布局</string>
+    <string name="appmenu_item_modifysysparams">修改系统参数</string>
+
+    <string name="dialoglabel_ok">确定</string>
+    <string name="dialoglabel_cancel">取消</string>
+
+	<string name="dialogtitle_updatematerials">更新素材</string>
+	<string name="dialoglabel_udiskupdate">U盘更新</string>
+
+	<string name="dialogtitle_updatematerials_failure">更新素材失败</string>
+	<string name="dialogmessage_updatematerials_pathexception">请检查U盘是否已插入，并确保U盘根目录存在素材文件夹。</string>
+	<string name="dialogmessage_updatematerials_numberexception">请检查U盘的素材文件夹中是否存在素材。</string>
+
+	<string name="progressbardlg_title">更新素材</string>
+	<string name="progressbardlg_msg_initialize">正在更新素材，请稍等。。。</string>
+	<string name="progressbardlg_msg_start">正在拷贝文件：</string>
+	<string name="progressbardlg_numberformat">第 %1$d个/共 %2$d个</string>
+
+	<string name="dialogtitle_changelayout">更改布局</string>
+	<string name="dlgtxt_rows">行数：</string>
+	<string name="dlgtxt_columns">列数：</string>
+
+	<string name="dialogtitle_modifysysparams">修改系统参数</string>
+	<string name="dlgtxt_autozoomtimeout">缩放超时时长：</string>
+	<string name="dlgtxt_pictureduration">图片播放时长：</string>
+
+</resources>

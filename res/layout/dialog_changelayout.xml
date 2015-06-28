@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center" >
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/dlgtxt_rows"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtxt_rows"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:focusable="true"
+            android:inputType="number"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/dlgtxt_columns"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtxt_columns"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:focusable="true"
+            android:inputType="number"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+    </TableRow>
+
+</TableLayout>
