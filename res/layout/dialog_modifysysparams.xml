@@ -34,6 +34,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:text="@string/dlgtxt_checkdistance"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtxt_checkdistance"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:focusable="true"
+            android:inputType="number"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="@string/dlgtxt_pictureduration"
             android:textColor="@android:color/white"
             android:textSize="20sp" />

@@ -12,7 +12,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 
 public class DbHelper {
-	private static Logger mLogger = new Logger();
+	private Logger mLogger = new Logger();
 
 	private static final int DEFAULT_SYSPARAM_DBID = 1;
 	
@@ -44,6 +44,7 @@ public class DbHelper {
 			param.screenheight = c.getInt(c.getColumnIndex(DbConstants.SPT_SCREENHEIGHT));
 			param.applicationpath = c.getString(c.getColumnIndex(DbConstants.SPT_APPLICATIONPATH));
 			param.autozoomtimeout = c.getInt(c.getColumnIndex(DbConstants.SPT_AUTOZOOMTIMEOUT));
+			param.checkdistance = c.getInt(c.getColumnIndex(DbConstants.SPT_CHECKDISTANCE));
 			param.pictureduration = c.getInt(c.getColumnIndex(DbConstants.SPT_PICTUREDURATION));
 			param.modetype = c.getInt(c.getColumnIndex(DbConstants.SPT_MODETYPE));
 			param.modedescription = c.getString(c.getColumnIndex(DbConstants.SPT_MODEDESCRITION));
@@ -70,6 +71,9 @@ public class DbHelper {
 			}
 			if (xmlsysparam.devautozoomtimeout != -1) {
 				cv.put(DbConstants.SPT_AUTOZOOMTIMEOUT, xmlsysparam.devautozoomtimeout);
+			}
+			if (xmlsysparam.devcheckdistance != -1) {
+				cv.put(DbConstants.SPT_CHECKDISTANCE, xmlsysparam.devcheckdistance);
 			}
 			if (xmlsysparam.devpictureduration != -1) {
 				cv.put(DbConstants.SPT_PICTUREDURATION, xmlsysparam.devpictureduration);
@@ -175,9 +179,12 @@ public class DbHelper {
 				DbConstants.CONTENTURI_SYSPARAM, DEFAULT_SYSPARAM_DBID), cv, null, null);
 	}
 
-	public void updateUserParams(int autozoomtimeout, int pictureduration) {
+	public void updateUserParams(int autozoomtimeout, int checkdistance, int pictureduration) {
 		if (autozoomtimeout < 0) {
 			mLogger.i("Auto zoom timeout is less than zore.");
+			return;
+		} else if (checkdistance < 0) {
+			mLogger.i("Check distance is less than zore.");
 			return;
 		} else if (pictureduration < 0) {
 			mLogger.i("Picture duration is less than zore.");
@@ -186,6 +193,7 @@ public class DbHelper {
 
 		ContentValues cv = new ContentValues();
 		cv.put(DbConstants.SPT_AUTOZOOMTIMEOUT, autozoomtimeout);
+		cv.put(DbConstants.SPT_CHECKDISTANCE, checkdistance);
 		cv.put(DbConstants.SPT_PICTUREDURATION, pictureduration);
 		mContentResolver.update(ContentUris.withAppendedId(
 				DbConstants.CONTENTURI_SYSPARAM, DEFAULT_SYSPARAM_DBID), cv, null, null);

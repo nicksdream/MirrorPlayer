@@ -1,2 +1,1 @@
-# MirrorPlayer
-This is a player for mirror advertising machine
+¾µÃæ²¥·ÅÆ÷

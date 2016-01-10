@@ -25,15 +25,8 @@ public class Constants {
 
 	public static final String DEFAULT_CHARSET = "UTF-8";
 
-	public static final char GPIO_GROUP = 'h';
-
-	public static final int GPIO_IO1_NUM = 9;
-	public static final int GPIO_IO2_NUM = 11;
-	public static final int GPIO_IO3_NUM = 12;
-
-	public static final int GPIO_STATUS_NONE = -1;
-	public static final int GPIO_STATUS_LOW = 0;
-	public static final int GPIO_STATUS_HIGH = 1;
+	public static final int CHECK_STATUS_NONE = 0;
+	public static final int CHECK_STATUS_SOMEONE = 1;
 
 	public static final String USB_LABEL = "usb";
 

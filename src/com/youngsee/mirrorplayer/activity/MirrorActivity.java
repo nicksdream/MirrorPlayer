@@ -17,7 +17,7 @@ import com.youngsee.mirrorplayer.MirrorApplication;
 import com.youngsee.mirrorplayer.common.Actions;
 import com.youngsee.mirrorplayer.common.Constants;
 import com.youngsee.mirrorplayer.common.MediaInfo;
-import com.youngsee.mirrorplayer.manager.GpioManager;
+import com.youngsee.mirrorplayer.manager.SerialPortManager;
 import com.youngsee.mirrorplayer.manager.SysParamManager;
 import com.youngsee.mirrorplayer.util.FileUtils;
 import com.youngsee.mirrorplayer.util.Logger;
@@ -37,6 +37,7 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -70,7 +71,7 @@ public class MirrorActivity extends Activity {
 
 	private PowerManager.WakeLock mWakeLock = null;
 
-	private GpioManager mGpioManager = null;
+	private SerialPortManager mSerialPortManager = null;
 
 	private FrameLayout mFrameLayout= null;
 
@@ -94,6 +95,8 @@ public class MirrorActivity extends Activity {
 	private ProgressDialog mUpdateProgressBar = null;
 
 	private AlertDialog mAlertDialog = null;
+
+	private long mExitTime = 0;
 
 	private class MenuItem {
 		public String name;
@@ -176,7 +179,7 @@ public class MirrorActivity extends Activity {
 
         initReceiver();
 
-        mGpioManager = GpioManager.getInstance();
+        mSerialPortManager = SerialPortManager.getInstance();
     }
 
     private void initMenuParams() {
@@ -282,7 +285,7 @@ public class MirrorActivity extends Activity {
 		mMirrorReceiver = new MirrorReceiver();
 
 		mMirrorReceiverFilter = new IntentFilter();
-		mMirrorReceiverFilter.addAction(Actions.GPIO_STATUS_CHANGE_ACTION);
+		mMirrorReceiverFilter.addAction(Actions.CHECK_STATUS_CHANGE_ACTION);
 	}
 
     @Override
@@ -333,9 +336,9 @@ public class MirrorActivity extends Activity {
 
     	MirrorApplication.getInstance().clearMemoryCache();
 
-    	if (mGpioManager != null) {
-    		mGpioManager.destroy();
-    		mGpioManager = null;
+    	if (mSerialPortManager != null) {
+    		mSerialPortManager.destroy();
+    		mSerialPortManager = null;
     	}
 
     	super.onDestroy();
@@ -345,6 +348,13 @@ public class MirrorActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
+			if ((System.currentTimeMillis() - mExitTime) > 2000){
+	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+	            mExitTime = System.currentTimeMillis();
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
             return true;
         case KeyEvent.KEYCODE_MENU:
         	if ((mUpdateProgressBar != null) && mUpdateProgressBar.isShowing()) {
@@ -810,10 +820,14 @@ public class MirrorActivity extends Activity {
     	final View dlgview = LayoutInflater.from(this).inflate(R.layout.dialog_modifysysparams, null);
     	final EditText edtxt_autozoomtimeout = (EditText)dlgview.findViewById(
     			R.id.edtxt_autozoomtimeout);
+    	final EditText edtxt_checkdistance = (EditText)dlgview.findViewById(
+    			R.id.edtxt_checkdistance);
     	final EditText edtxt_pictureduration = (EditText)dlgview.findViewById(
     			R.id.edtxt_pictureduration);
     	edtxt_autozoomtimeout.setText(String.valueOf(
     			SysParamManager.getInstance().getAutoZoomTimeout()));
+    	edtxt_checkdistance.setText(String.valueOf(
+    			SysParamManager.getInstance().getCheckDistance()));
     	edtxt_pictureduration.setText(String.valueOf(
     			SysParamManager.getInstance().getPictureDuration()));
 
@@ -832,6 +846,13 @@ public class MirrorActivity extends Activity {
 									+ autozoomtimeout + ".");
 							autozoomtimeout = 1;
 						}
+						int checkdistance = Integer.parseInt(
+								edtxt_checkdistance.getText().toString());
+						if (checkdistance < 20) {
+							mLogger.i("Change it as 20 if check distance is less than 20, distance = "
+									+ checkdistance + ".");
+							checkdistance = 20;
+						}
 						int pictureduration = Integer.parseInt(
 								edtxt_pictureduration.getText().toString());
 						if (pictureduration < 1) {
@@ -839,7 +860,7 @@ public class MirrorActivity extends Activity {
 									+ pictureduration + ".");
 							pictureduration = 1;
 						}
-						SysParamManager.getInstance().setUserParams(autozoomtimeout, pictureduration);
+						SysParamManager.getInstance().setUserParams(autozoomtimeout, checkdistance, pictureduration);
 					}
 
 				})
@@ -992,18 +1013,11 @@ public class MirrorActivity extends Activity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action.equals(Actions.GPIO_STATUS_CHANGE_ACTION)) {
-				int number = intent.getIntExtra(
-						Actions.GPIO_STATUS_CHANGE_ACTION_EXTRA_NUMBER, -1);
-				if (number != Constants.GPIO_IO3_NUM) {
-					mLogger.i("Gpio isn't I01, ignore. Number is " + number);
-					return;
-				}
-
+			if (action.equals(Actions.CHECK_STATUS_CHANGE_ACTION)) {
 				int status = intent.getIntExtra(
-						Actions.GPIO_STATUS_CHANGE_ACTION_EXTRA_STATUS, -1);
+						Actions.CHECK_STATUS_CHANGE_ACTION_EXTRA_STATUS, -1);
 				switch (status) {
-				case Constants.GPIO_STATUS_LOW:
+				case Constants.CHECK_STATUS_NONE:
 					if ((mCurrentStatus == STATUS_AUTOZOOMOUT)
 							&& !mHandler.hasMessages(EVENT_AUTOZOOMOUT_TIMEOUT)) {
 						long timeoutmillis;
@@ -1019,7 +1033,7 @@ public class MirrorActivity extends Activity {
 					}
 
 					break;
-				case Constants.GPIO_STATUS_HIGH:
+				case Constants.CHECK_STATUS_SOMEONE:
 					mHandler.removeMessages(EVENT_AUTOZOOMOUT_TIMEOUT);
 
 					if (mCurrentStatus == STATUS_FULLSCREEN) {
@@ -1029,7 +1043,7 @@ public class MirrorActivity extends Activity {
 
 					break;
 				default:
-					mLogger.i("Gpio status is invalid, skip. Status is " + status);
+					mLogger.i("Check status is invalid, skip. Status is " + status);
 					break;
 				}
 			}

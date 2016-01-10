@@ -20,6 +20,7 @@
 -dontpreverify                                                                  # 混淆时是否做预校验
 -verbose                                                                        # 混淆时是否记录日志
 
+-ignorewarnings
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*        # 混淆时所采用的算法
 
 -keepattributes *Annotation*
@@ -27,6 +28,7 @@
 -keepattributes Signature                                                       # 过滤泛型
 
 -libraryjars libs/android-support-v4.jar
+-libraryjars libs/commons-codec-1.9.jar
 -libraryjars libs/fastjson-1.2.5.jar
 -libraryjars libs/ftp4j-1.7.2.jar
 

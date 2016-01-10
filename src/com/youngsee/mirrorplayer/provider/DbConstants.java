@@ -24,6 +24,7 @@ public class DbConstants {
 	public static final String SPT_SCREENHEIGHT = "screenheight";
 	public static final String SPT_APPLICATIONPATH = "applicationpath";
 	public static final String SPT_AUTOZOOMTIMEOUT = "autozoomtimeout";
+	public static final String SPT_CHECKDISTANCE = "checkdistance";
 	public static final String SPT_PICTUREDURATION = "pictureduration";
 	public static final String SPT_MODETYPE = "modetype";
 	public static final String SPT_MODEDESCRITION = "modedescription";

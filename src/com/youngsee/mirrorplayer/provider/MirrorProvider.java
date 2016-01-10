@@ -89,28 +89,6 @@ public class MirrorProvider extends ContentProvider {
 
 		switch (s_urlMatcher.match(uri)) {
 		case URL_SYSPARAM:
-			if (!values.containsKey(DbConstants.SPT_SCREENWIDTH)) {
-				values.put(DbConstants.SPT_SCREENWIDTH, -1);
-			}
-			if (!values.containsKey(DbConstants.SPT_SCREENHEIGHT)) {
-				values.put(DbConstants.SPT_SCREENHEIGHT, -1);
-			}
-			if (!values.containsKey(DbConstants.SPT_AUTOZOOMTIMEOUT)) {
-				values.put(DbConstants.SPT_AUTOZOOMTIMEOUT, -1);
-			}
-			if (!values.containsKey(DbConstants.SPT_PICTUREDURATION)) {
-				values.put(DbConstants.SPT_PICTUREDURATION, -1);
-			}
-			if (!values.containsKey(DbConstants.SPT_MODETYPE)) {
-				values.put(DbConstants.SPT_MODETYPE, -1);
-			}
-			if (!values.containsKey(DbConstants.SPT_LAYOUTROWNUM)) {
-				values.put(DbConstants.SPT_LAYOUTROWNUM, -1);
-			}
-			if (!values.containsKey(DbConstants.SPT_LAYOUTCOLUMNNUM)) {
-				values.put(DbConstants.SPT_LAYOUTCOLUMNNUM, -1);
-			}
-
 			rowId = db.insert(DbConstants.TABLE_SYSPARAM, null, values);
 			if (rowId > 0) {
 				insertUri = ContentUris.withAppendedId(DbConstants.CONTENTURI_SYSPARAM, rowId);

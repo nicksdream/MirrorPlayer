@@ -1003,7 +1003,7 @@ public class FileUtils {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");
             }
-            
+
             // Remove invalid character.
             Pattern p = Pattern.compile("(\ufeff)");
             Matcher m = p.matcher(sb.toString());

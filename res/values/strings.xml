@@ -32,6 +32,7 @@
 
 	<string name="dialogtitle_modifysysparams">Modify System Parameters</string>
 	<string name="dlgtxt_autozoomtimeout">Zoom timeout :&#160;</string>
+	<string name="dlgtxt_checkdistance">Check distance :&#160;</string>
 	<string name="dlgtxt_pictureduration">Picture duration :&#160;</string>
 
 </resources>

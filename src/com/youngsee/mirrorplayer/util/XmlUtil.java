@@ -25,6 +25,7 @@ public class XmlUtil {
 	public static final String SYSPARAMXML_PROP_DEV_ID = "id";
 	public static final String SYSPARAMXML_PROP_DEV_MODEL = "model";
 	public static final String SYSPARAMXML_PROP_DEV_AUTOZOOMTIMEOUT = "autozoomtimeout";
+	public static final String SYSPARAMXML_PROP_DEV_CHECKDISTANCE = "checkdistance";
 	public static final String SYSPARAMXML_PROP_DEV_PICTUREDURATION = "pictureduration";
 	public static final String SYSPARAMXML_PROP_MODE_TYPE = "type";
 	public static final String SYSPARAMXML_PROP_MODE_DESC = "description";
@@ -90,6 +91,8 @@ public class XmlUtil {
 	            				SYSPARAMXML_PROP_DEV_MODEL);
 	            		param.devautozoomtimeout = Integer.parseInt(parser.getAttributeValue(null,
 	            				SYSPARAMXML_PROP_DEV_AUTOZOOMTIMEOUT));
+	            		param.devcheckdistance = Integer.parseInt(parser.getAttributeValue(null,
+	            				SYSPARAMXML_PROP_DEV_CHECKDISTANCE));
 	            		param.devpictureduration = Integer.parseInt(parser.getAttributeValue(null,
 	            				SYSPARAMXML_PROP_DEV_PICTUREDURATION));
 	            	} else if (parser.getName().equals(SYSPARAMXML_TAG_MODEINFO)) {

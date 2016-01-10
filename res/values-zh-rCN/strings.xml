@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">广告播放器</string>
+    <string name="app_name">镜面播放器</string>
     <string name="action_settings">设置</string>
 
     <string name="txt_progbar">数据加载中......</string>
@@ -32,6 +32,7 @@
 
 	<string name="dialogtitle_modifysysparams">修改系统参数</string>
 	<string name="dlgtxt_autozoomtimeout">缩放超时时长：</string>
+	<string name="dlgtxt_checkdistance">镜面检测距离：</string>
 	<string name="dlgtxt_pictureduration">图片播放时长：</string>
 
 </resources>
