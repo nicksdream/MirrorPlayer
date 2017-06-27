@@ -12,7 +12,7 @@
 
 # Add any project specific keep options here:
 
--optimizationpasses 5                                                           # 指定代码的压缩级别（0 ~ 7）
+-optimizationpasses 7                                                           # 指定代码的压缩级别（0 ~ 7）
 
 #-dontusemixedcaseclassnames                                                     # 是否使用大小写混合
 #-dontskipnonpubliclibraryclasses                                               # 是否混淆第三方jar
